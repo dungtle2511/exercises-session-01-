@@ -1,5 +1,6 @@
 import { BasePage } from './BasePage';
 import { expect, Page } from '@playwright/test';
+import { BASE_URL } from '../playwright.config';
 
 export class LoginPage extends BasePage {
   constructor(page: Page) {
@@ -17,7 +18,7 @@ export class LoginPage extends BasePage {
   }
 
   async login(username: string, password: string) {
-    await this.goto('http://localhost:3000/signin');
+    await this.goto(`${BASE_URL}/signin`);
     await this.components().usernameInput.fill(username);
     await this.components().passwordInput.fill(password);
     await this.components().signInButton.click();

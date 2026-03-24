@@ -1,3 +1,4 @@
+import { BASE_URL } from '../playwright.config';
 import { BasePage } from './BasePage';
 import { expect, Page } from '@playwright/test';
 
@@ -19,7 +20,7 @@ export class SignUpPage extends BasePage {
   }
 
   async signup(firstName: string, lastName: string, username: string, password: string) {
-    await this.goto('http://localhost:3000/signup');
+    await this.goto(`${BASE_URL}/signup`);
     await this.components().firstNameInput.fill(firstName);
     await this.components().lastNameInput.fill(lastName);
     await this.components().usernameInput.fill(username);
