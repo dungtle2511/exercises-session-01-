@@ -1,7 +1,8 @@
 import { test, expect } from '@playwright/test';
+import { BASE_URL } from '../../playwright.config';
 
 test('test', async ({ page }) => {
-  await page.goto('http://localhost:3000/signin');
+  await page.goto(`${BASE_URL}/signin`);
   await page.locator('[data-test="signup"]').click();
   await page.locator('[data-test="signup"]').click();
   await page.getByRole('textbox', { name: 'First Name' }).fill('test');
