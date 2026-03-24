@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+
+export const API_BASE_URL = process.env.API_BASE_URL ?? 'http://64.176.58.30:3000';
+
 export default defineConfig({
   testDir: './e2e',
   timeout: 30 * 1000,
@@ -16,7 +19,8 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like await page.goto(''). */
-    baseURL: 'http://localhost:3000',
+    baseURL: 'http://64.176.58.30:3000',
+    // baseURL: 'http://localhost:3000',
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'retain-on-failure',
     screenshot: 'only-on-failure',

@@ -1,5 +1,6 @@
 import { BasePage } from './BasePage';
 import { Locator, Page } from '@playwright/test';
+import { ApiUtils } from '../utils/ApiUtils';
 
 export class BankAccountsPage extends BasePage {
   constructor(page: Page) {
@@ -39,5 +40,27 @@ export class BankAccountsPage extends BasePage {
     await this.page.waitForLoadState('networkidle');
     let deleteBank = this.page.getByText(`${bankName} (Deleted)`);
     return deleteBank;
+  }
+
+  async waitTheBankAccountListIsDisplayed(bankName: string): Promise<boolean> {
+    const bankParagraph = this.page.locator('p').filter({ hasText: bankName }).first();
+    try {
+      await bankParagraph.waitFor({ state: 'visible', timeout: 5000 });
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  async deleteBankAccountUsingApi(api: ApiUtils, bankName: string) {
+    const ok = await api.deleteBankAccountByName(bankName);
+    if (!ok) {
+      throw new Error(`Failed to delete bank account "${bankName}" via API`);
+    }
+    await this.page.reload();
+  }
+
+  async expectNoBankAccountsHeadingVisible() {
+    await this.page.getByRole('heading', { name: 'No Bank Accounts' }).waitFor({ state: 'visible' });
   }
 }
