@@ -13,6 +13,11 @@ export class BasePage {
       home: this.page.locator('[data-test="sidenav-home"]'),
       signInSubmit: this.page.locator('[data-test="signin-submit"]'),
       userOnboardingDialogTitle: this.page.locator('[data-test="user-onboarding-dialog-title"]'),
+      userOnboardingNextButton: this.page.locator('[data-test="user-onboarding-next"]'),
+      userOnboardingBankNameInput: this.page.getByRole('textbox', { name: 'Bank Name' }),
+      userOnboardingRoutingNumberInput: this.page.getByRole('textbox', { name: 'Routing Number' }),
+      userOnboardingAccountNumberInput: this.page.getByRole('textbox', { name: 'Account Number' }),
+      userOnboardingSubmitButton: this.page.locator('[data-test="bankaccount-submit"]'),
       userFullName: this.page.locator('[data-test="sidenav-user-full-name"]'),
       // Add more shared components as needed
     };

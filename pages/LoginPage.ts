@@ -27,4 +27,13 @@ export class LoginPage extends BasePage {
   async clickSignUpLink() {
     await this.components().signUpLink.click();
   }
+
+  async finishOnboarding(bankName: string, routingNumber: string, accountNumber: string) {
+    await this.components().userOnboardingNextButton.click();
+    await this.components().userOnboardingBankNameInput.fill(bankName);
+    await this.components().userOnboardingRoutingNumberInput.fill(routingNumber);
+    await this.components().userOnboardingAccountNumberInput.fill(accountNumber);
+    await this.components().userOnboardingSubmitButton.click();
+    await this.components().userOnboardingNextButton.click();
+  }
 }
