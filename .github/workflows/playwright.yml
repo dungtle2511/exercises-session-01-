@@ -22,7 +22,7 @@ jobs:
     - name: Debug workspace
       run: ls -la && pwd
     - name: Run Playwright tests
-      run: npx playwright test --shard=1/4
+      run: npx playwright test e2e/session-3/ex1.spec.ts e2e/session-3/ex2.spec.ts
     - uses: actions/upload-artifact@v4
       if: always()
       with:
