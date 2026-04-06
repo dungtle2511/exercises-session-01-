@@ -5,5 +5,5 @@ const PASSWORD = 's3cret';
 
 test('authenticate and save storage state', async ({ loginPage, page }) => {
   await loginPage.login(USERNAME, PASSWORD);
-  await page.context().storageState({ path: '.auth' });
+  await page.context().storageState({ path: 'e2e/session-4/.auth' });
 });
