@@ -1,4 +1,4 @@
-name: Intro to CI with Playwright
+name: Session 4
 on:
   push:
     branches: [ main, master ]
@@ -7,9 +7,15 @@ on:
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: 'true'
 jobs:
-  Intro_ci_run_test:
+  run_test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        shard: [1, 2]
+    defaults:
+      run:
+        working-directory: session-4
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -22,10 +28,39 @@ jobs:
     - name: Debug workspace
       run: ls -la && pwd
     - name: Run Playwright tests
-      run: npx playwright test --shard=1/4
+      run: npx playwright test --shard=${{ matrix.shard }}/2
     - uses: actions/upload-artifact@v4
       if: always()
       with:
-        name: playwright-report
-        path: playwright-report/
+        name: blob-report-session-04-shard-${{ matrix.shard }}
+        path: blob-report
+        retention-days: 30
+    
+  merge-reports:
+    needs: run_test
+    if: always()
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: session-04
+    steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-node@v4
+      with:
+        node-version: 25
+    - name: Install dependencies
+      run: npm install
+    - name: Download blob reports from all shards
+      uses: actions/download-artifact@v4
+      with:
+        path: session-04/all-blob-reports
+        pattern: blob-report-session-04-shard-*
+        merge-multiple: true
+    - name: Merge reports
+      run: npx playwright merge-reports --reporter html ./all-blob-reports
+    - uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: playwright-report-session-04
+        path: session-04/playwright-report/
         retention-days: 30

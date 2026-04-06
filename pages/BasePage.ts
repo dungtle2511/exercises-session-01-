@@ -19,6 +19,8 @@ export class BasePage {
       userOnboardingAccountNumberInput: this.page.getByRole('textbox', { name: 'Account Number' }),
       userOnboardingSubmitButton: this.page.locator('[data-test="bankaccount-submit"]'),
       userFullName: this.page.locator('[data-test="sidenav-user-full-name"]'),
+      userName: this.page.locator('[data-test="sidenav-username"]'),
+      transactionList: this.page.locator('[data-test="transaction-list"]'),
       // Add more shared components as needed
     };
   }
