@@ -25,7 +25,7 @@ jobs:
     - name: Debug workspace
       run: ls -la && pwd
     - name: Run Playwright tests
-      run: npx playwright test e2e/session-4/ex1.spec.ts e2e/session-4/ex2.spec.ts --shard=${{ matrix.shard }}/2
+      run: npx playwright test --shard=${{ matrix.shard }}/2
     - uses: actions/upload-artifact@v4
       if: always()
       with:
@@ -47,11 +47,11 @@ jobs:
     - name: Download blob reports from all shards
       uses: actions/download-artifact@v4
       with:
-        path: e2e/session-04/all-blob-reports
+        path: all-blob-reports
         pattern: blob-report-session-04-shard-*
         merge-multiple: true
     - name: Merge reports
-      run: npx playwright merge-reports --reporter html ./e2e/session-04/all-blob-reports
+      run: npx playwright merge-reports --reporter html ./all-blob-reports
     - uses: actions/upload-artifact@v4
       if: always()
       with:
