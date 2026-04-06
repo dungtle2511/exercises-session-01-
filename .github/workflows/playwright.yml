@@ -25,7 +25,7 @@ jobs:
     - name: Debug workspace
       run: ls -la && pwd
     - name: Run Playwright tests
-      run: npx playwright test e2e/session-4/ex1.spec.ts e2e/session-4/ex2.spec.ts --shard=${{ matrix.shard }}/2 --reporter=blob=blob-report
+      run: npx playwright test e2e/session-4/ex1.spec.ts e2e/session-4/ex2.spec.ts --shard=${{ matrix.shard }}/2 --reporter=blob-report
     - uses: actions/upload-artifact@v4
       if: always()
       with:
