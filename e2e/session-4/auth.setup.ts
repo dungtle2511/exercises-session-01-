@@ -1,4 +1,4 @@
-import { test } from '../fixture/fixture'; // Use custom fixtures from auto/fixture
+import { test } from '../../fixture/fixture'; // Use custom fixtures from auto/fixture
 
 const USERNAME = 'Heath93';
 const PASSWORD = 's3cret';

@@ -9,7 +9,6 @@ test.beforeAll(async () => {
   const usersRes = await req.get(`${BASE_URL}/testData/users`);
   const usersJson = await usersRes.json();
 
-  console.log('Authenticated user:', usersJson.results);
   await req.dispose();
 });
 
