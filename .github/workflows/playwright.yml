@@ -15,7 +15,7 @@ jobs:
         shard: [1, 2]
     defaults:
       run:
-        working-directory: session-4
+        working-directory: e2e/session-4
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
@@ -42,7 +42,7 @@ jobs:
     runs-on: ubuntu-latest
     defaults:
       run:
-        working-directory: session-04
+        working-directory: e2e/session-4
     steps:
     - uses: actions/checkout@v4
     - uses: actions/setup-node@v4
